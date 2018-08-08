@@ -1,0 +1,48 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <?foreach {devices}?>
+    <device>
+      <name>{device_name}</name>
+      <config>
+
+        <!-- IOS -->
+        <snmp-server xmlns="urn:ios">
+          <community>
+            <name>{/readwrite}</name>
+            <RW/>
+          </community>
+          <community>
+            <name>{/readonly}</name>
+            <RO/>
+          </community>
+        </snmp-server>
+
+        <!-- NX-OS -->
+        <snmp-server xmlns="http://tail-f.com/ned/cisco-nx">
+          <community>
+            <snmp-community-string>{/readwrite}</snmp-community-string>
+            <group>network-admin</group>
+          </community>
+          <community>
+            <snmp-community-string>{/readonly}</snmp-community-string>
+            <group>network-operator</group>
+          </community>
+        </snmp-server>
+
+        <!-- IOS-XR -->
+        <snmp-server xmlns="http://tail-f.com/ned/cisco-ios-xr">
+          <community>
+            <name>{/readwrite}</name>
+            <RW/>
+          </community>
+          <community>
+            <name>{/readonly}</name>
+            <RO/>
+          </community>
+        </snmp-server>
+
+      </config>
+    </device>
+    <?end?>
+  </devices>
+</config-template>
